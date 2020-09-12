@@ -2,7 +2,6 @@ package com.codecool.video.controller;
 
 import com.codecool.video.entity.Video;
 import com.codecool.video.model.Review;
-import com.codecool.video.model.ReviewList;
 import com.codecool.video.model.VideoDetails;
 import com.codecool.video.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/video")
+@RequestMapping("/asd")
 public class VideoController {
 
     @Autowired
@@ -31,11 +30,17 @@ public class VideoController {
         return videoRepository.findAll();
     }
 
-    @GetMapping("/details/{id}")
-    public VideoDetails retrieveVideo(@PathVariable("id") Long id) {
-        Video video = videoRepository.findById(id).orElse(null);
-        ReviewList response = restTemplate.getForObject(baseUrl + "/video/" + id.toString(), ReviewList.class);
-        List<Review> reviews = response.getReviews();
+    @GetMapping("/details")
+    public VideoDetails retrieveVideo() {
+        Video video = videoRepository.findById(1L).orElse(null);
+
+       // Review[] reviews = restTemplate.getForEntity(baseUrl + "/video/" + id.toString(), Review[].class).getBody();
+        Review[] reviews = restTemplate.getForEntity("http://localhost:8090/review/video/1", Review[].class).getBody();
+        System.out.println("RESPONSE ");
+        for (Review i: reviews) {
+
+            System.out.println("aaaaaaaaaaaa " + i);
+        }
         return new VideoDetails(video, reviews);
     }
 

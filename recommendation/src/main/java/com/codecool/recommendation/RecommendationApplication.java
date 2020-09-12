@@ -8,15 +8,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.List;
 
 
 @SpringBootApplication
-@EnableSwagger2
 @EnableEurekaClient
 public class RecommendationApplication {
 
@@ -28,23 +24,21 @@ public class RecommendationApplication {
 	}
 
 	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.ant("/review/**"))
-				.build();
-	}
-
-	@Bean
 	public CommandLineRunner init() {
 		return args -> {
-			Review strangerThings = Review.builder()
+			Review strangerThings1 = Review.builder()
 					.rating(5)
 					.comment("Stranger Things is nothing if not a surprising, sometimes scary, moving and successful homage to the era of Spielberg's 'ET' and the 1980s themselves. To conclude, Stranger Things is a blast, thanks to its strong storytelling and high production values.")
 					.videoId(1)
 					.build();
-			reviewRepository.save(strangerThings);
+			reviewRepository.save(strangerThings1);
+
+			Review strangerThings2 = Review.builder()
+					.rating(4)
+					.comment("While deeply enjoyable, nearly the entire cast of Stranger Things is white. This kind of retro tokenism is not something we should be nostalgic about.")
+					.videoId(1)
+					.build();
+			reviewRepository.save(strangerThings2);
 
 			Review blackMirror = Review.builder()
 					.rating(4)
@@ -52,6 +46,12 @@ public class RecommendationApplication {
 					.videoId(2)
 					.build();
 			reviewRepository.save(blackMirror);
+			List<Review> r = reviewRepository.findAllByVideoId(1);
+			for (Review i: r
+				 ) {
+
+				System.out.println("ffffffffffffffffffff " + i);
+			}
 		};
 
 	}

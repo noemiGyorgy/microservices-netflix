@@ -38,7 +38,6 @@ public class VideoApplication {
 	}
 
 	@Bean
-	@LoadBalanced
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
