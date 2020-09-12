@@ -30,17 +30,13 @@ public class VideoController {
         return videoRepository.findAll();
     }
 
-    @GetMapping("/details")
-    public VideoDetails retrieveVideo() {
-        Video video = videoRepository.findById(1L).orElse(null);
+    @GetMapping("/details/{id}")
+    public VideoDetails retrieveVideo(@PathVariable("id") String id) {
+        Video video = videoRepository.findById(Long.valueOf(id)).orElse(null);
 
        // Review[] reviews = restTemplate.getForEntity(baseUrl + "/video/" + id.toString(), Review[].class).getBody();
-        Review[] reviews = restTemplate.getForEntity("http://localhost:8090/review/video/1", Review[].class).getBody();
-        System.out.println("RESPONSE ");
-        for (Review i: reviews) {
+        Review[] reviews = restTemplate.getForEntity("http://localhost:8090/review/video/" + id, Review[].class).getBody();
 
-            System.out.println("aaaaaaaaaaaa " + i);
-        }
         return new VideoDetails(video, reviews);
     }
 
