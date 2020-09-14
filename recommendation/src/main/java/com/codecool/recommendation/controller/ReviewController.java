@@ -16,7 +16,7 @@ public class ReviewController {
 
     @GetMapping("/video/{videoId}")
     public List<Review> retrieveVideo(@PathVariable Long videoId) {
-        return reviewRepository.findAllByVideoId(videoId);
+        return reviewRepository.findAllByVideoIdOrderByRatingDesc(videoId);
     }
 
     @PostMapping("/add")

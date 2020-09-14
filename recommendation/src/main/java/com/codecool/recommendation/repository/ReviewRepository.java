@@ -9,5 +9,5 @@ import java.util.List;
 @Service
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    List<Review> findAllByVideoId(long videoId);
+    List<Review> findAllByVideoIdOrderByRatingDesc(final long videoId);
 }

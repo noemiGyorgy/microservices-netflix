@@ -27,31 +27,26 @@ public class RecommendationApplication {
 	public CommandLineRunner init() {
 		return args -> {
 			Review strangerThings1 = Review.builder()
-					.rating(5)
-					.comment("Stranger Things is nothing if not a surprising, sometimes scary, moving and successful homage to the era of Spielberg's 'ET' and the 1980s themselves. To conclude, Stranger Things is a blast, thanks to its strong storytelling and high production values.")
-					.videoId(1)
+					.rating(4)
+					.comment("While deeply enjoyable, nearly the entire cast of Stranger Things is white. This kind of retro tokenism is not something we should be nostalgic about.")
+					.videoId(1L)
 					.build();
 			reviewRepository.save(strangerThings1);
 
 			Review strangerThings2 = Review.builder()
-					.rating(4)
-					.comment("While deeply enjoyable, nearly the entire cast of Stranger Things is white. This kind of retro tokenism is not something we should be nostalgic about.")
-					.videoId(1)
+					.rating(5)
+					.comment("Stranger Things is nothing if not a surprising, sometimes scary, moving and successful homage to the era of Spielberg's 'ET' and the 1980s themselves. To conclude, Stranger Things is a blast, thanks to its strong storytelling and high production values.")
+					.videoId(1L)
 					.build();
 			reviewRepository.save(strangerThings2);
 
 			Review blackMirror = Review.builder()
 					.rating(4)
 					.comment("The 23 episodes provide us glimpses of the different outcomes as humans interact with advanced technology. The overarching theme for me is that technology has both beneficial and inimical effects on human behaviour.")
-					.videoId(2)
+					.videoId(2L)
 					.build();
 			reviewRepository.save(blackMirror);
-			List<Review> r = reviewRepository.findAllByVideoId(1);
-			for (Review i: r
-				 ) {
 
-				System.out.println("ffffffffffffffffffff " + i);
-			}
 		};
 
 	}

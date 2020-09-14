@@ -50,9 +50,10 @@ public class VideoController {
     }
 
     @PostMapping("/addReview")
-    public void addReview(@RequestBody Review review) {
+    public VideoDetails addReview(@RequestBody Review review) {
         HttpEntity<Review> request = new HttpEntity<>(review);
         restTemplate.postForObject(baseUrl + "/add", request, Review.class);
+        return retrieveVideo(String.valueOf(review.getId()));
     }
 
 }
