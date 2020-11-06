@@ -1,6 +1,10 @@
 # Netflix Reviews
 
-Netflix Reviews is a software that is a network of loosely coupled web services. The different services communicate over REST Apis.
+Netflix Reviews is a software that is a network of loosely coupled web services for writting reviews about Netflix movies and series. The different services communicate over REST Apis.
+
+Technical goal of Netflix Reviews was practicing how to create microservices. The backend is written in Java, using Spring, and the frontend is a React app.
+
+## Service Architecture
 
 ![Service Architecture](/architecture.jpg?raw=true "Service Architecture")
 
@@ -22,7 +26,7 @@ Video recommendation service:
 
 ## Usage
 
-Clone the repository:
+Clone this repository:
 
 ```
 git clone git@github.com:noemiGyorgy/microservices-netflix.git
